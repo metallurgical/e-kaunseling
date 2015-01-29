@@ -40,7 +40,7 @@
 
 $route['default_controller'] = "dashboard";
 $route['404_override'] = '';
-
+$route['^(rbac)/(.+)$'] = $route['default_controller']."/index/$1/$2";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
