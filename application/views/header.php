@@ -27,6 +27,15 @@
 
     <!-- Custom Fonts -->
     <link href="<?php echo base_url();?>assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <?php 
+    foreach($css_files as $file): ?>
+        <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
+     
+    <?php endforeach; ?>
+    <?php foreach($js_files as $file): ?>
+     
+        <script src="<?php echo $file; ?>"></script>
+    <?php endforeach; ?>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

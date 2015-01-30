@@ -13,7 +13,13 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="<?php echo base_url();?>dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url();?>counselors"><i class="fa fa-dashboard fa-fw"></i> Counselor</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url();?>students"><i class="fa fa-dashboard fa-fw"></i> Sudents</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
