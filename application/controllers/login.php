@@ -46,7 +46,7 @@ class Login extends CI_Controller {
 				               		);
 				    
 				    $this->session->set_userdata($newdata); 
-				    redirect('s_forum/view_forum');   	 	
+				    redirect('s_forum/view_categories');   	 	
 			    }
 			    else{
 			 		$newdata = array(

@@ -1,5 +1,52 @@
 <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
+                <?php 
+                if($this->session->userdata('type') == "students"){                     // students
+                    ?>  
+                        <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url();?>s_forum/view_categories"><i class="fa fa-dashboard fa-fw"></i> Forum</a>
+                        </li>
+                        
+                        
+                    </ul>
+                    <?php
+                }
+                else if($this->session->userdata('type') == "counselors"){              // counselors
+                ?>
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url();?>dashboard"><i class="fa fa-dashboard fa-fw"></i> A Forum</a>
+                        </li>
+                        
+                        
+                    </ul>
+                <?php
+                }
+                else{                                                                   // admin only
+                ?>
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
@@ -41,6 +88,9 @@
                         
                         
                     </ul>
+                <?php
+                }
+            ?>
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
