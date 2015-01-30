@@ -22,13 +22,16 @@
                             <a href="<?php echo base_url();?>students"><i class="fa fa-dashboard fa-fw"></i> Sudents</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Forums<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Flot Charts</a>
+                                    <a href="<?php echo base_url();?>forum/categories">Forum Categories</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Morris.js Charts</a>
+                                    <a href="<?php echo base_url();?>forum/topics">Forum Topics</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo base_url();?>forum/answers">Forum Answer</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
