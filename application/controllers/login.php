@@ -44,8 +44,9 @@ class Login extends CI_Controller {
 										'type' => 'students',
 										'id'   => $data['user']['student_id']
 				               		);
-				    redirect('s_forum/view_forum');
-				    $this->session->set_userdata($newdata);    	 	
+				    
+				    $this->session->set_userdata($newdata); 
+				    redirect('s_forum/view_forum');   	 	
 			    }
 			    else{
 			 		$newdata = array(
@@ -54,8 +55,10 @@ class Login extends CI_Controller {
 										'type' => 'counselors',
 										'id'   => $data['user']['counselor_id']
 				               		); 
+			 		
+			 		$this->session->set_userdata($newdata);
 			 		redirect('c_forum');
-			 		$this->session->set_userdata($newdata); 
+
 			 	}
 			 	
 
