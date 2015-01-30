@@ -7,7 +7,6 @@ class Login extends CI_Controller {
     {
         parent::__construct();
         $this->output->enable_profiler(TRUE); 
-        $this->load->library('session');
         
     }
 
@@ -45,7 +44,7 @@ class Login extends CI_Controller {
 										'type' => 'students',
 										'id'   => $data['user']['student_id']
 				               		);
-				    redirect('appointment');
+				    redirect('s_forum/view_forum');
 				    $this->session->set_userdata($newdata);    	 	
 			    }
 			    else{
@@ -55,7 +54,7 @@ class Login extends CI_Controller {
 										'type' => 'counselors',
 										'id'   => $data['user']['counselor_id']
 				               		); 
-			 		redirect('appointment');
+			 		redirect('c_forum');
 			 		$this->session->set_userdata($newdata); 
 			 	}
 			 	

@@ -1,7 +1,7 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 //List of public controller which access will not be checked by our library
-$config['public_controller'] = array('welcome','login');
+$config['public_controller'] = array('welcome','login','s_forum');
 
 // Message to return while performing an ajax request
 $config['ajax_no_permission_msg'] = "You do not have permission to perform this action!";
