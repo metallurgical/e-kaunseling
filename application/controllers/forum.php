@@ -29,7 +29,7 @@ class Forum extends CI_Controller {
 		$crud->callback_after_delete(array($this,'callback_after_delete_categories'));
 		$output = $crud->render();
 		$output->data = $data;
-		$this->load->view('forum_categories', $output);
+		$this->load->view('universal_page', $output);
 		
        
     }
@@ -67,7 +67,7 @@ class Forum extends CI_Controller {
 		$output = $crud->render();
 		$output->data = $data;
 		$state = $crud->getState();
-		$this->load->view('forum_topics', $output);
+		$this->load->view('universal_page', $output);
        
     }
 
@@ -103,7 +103,7 @@ class Forum extends CI_Controller {
 		$output = $crud->render();
 		$output->data = $data;
 		$state = $crud->getState();
-		$this->load->view('forum_answers', $output);
+		$this->load->view('universal_page', $output);
        
     }
 }

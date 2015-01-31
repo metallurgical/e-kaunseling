@@ -38,7 +38,7 @@ class S_forum extends CI_Controller {
 		$crud->add_action('View Topics', $path.'/assets/grocery_crud/themes/flexigrid/css/images/magnifier.png', 's_forum/view_topics');
 		$output = $crud->render();
 		$output->data = $data;
-		$this->load->view('view_categories', $output);		
+		$this->load->view('universal_page', $output);		
 		
     }
 
@@ -46,7 +46,6 @@ class S_forum extends CI_Controller {
 
 		$crud  = new grocery_CRUD();
 		$state = $crud->getState();
-
 		$path = base_url();
 
     	$category_id = $this->uri->segment(3);
@@ -90,7 +89,7 @@ class S_forum extends CI_Controller {
 		
 		$output = $crud->render();
 		$output->data = $data;
-		$this->load->view('view_topics', $output);		
+		$this->load->view('universal_page', $output);		
 		
     }
 
@@ -210,7 +209,7 @@ class S_forum extends CI_Controller {
 		
 		$output = $crud->render();
 		$output->data = $data;
-		$this->load->view('view_answers', $output);		
+		$this->load->view('universal_page', $output);		
 		
     }
 	

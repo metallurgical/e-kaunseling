@@ -16,24 +16,17 @@ class Students extends CI_Controller {
         );
     }
 
-    public function rendering_view($filename, $data){
-
-    	$output = $this->grocery_crud->render();
-    	if($data === "undefined" || $data === "null" || $data === ""){
-    		//do nothing
-    	}
-    	else{
-    		$output->data = $data;    	
-    	}    	
-    	    	    	
-        $this->load->view('students', $output);
-    }
+    
 
 	public function index()
 	{
-		$data['page_header_title'] = ucfirst($this->uri->segment(1)) . " Management";
-		$this->grocery_crud->set_table('students');
-		$this->rendering_view('students', $data);
+		$crud = new grocery_CRUD();
+        $state = $crud->getState();
+        $data['page_header_title'] = ucfirst($this->uri->segment(1)) . " Management";
+        $crud->set_table('students');
+        $output = $crud->render();
+        $output->data = $data;
+        $this->load->view('universal_page', $output);
        
     }
 }
