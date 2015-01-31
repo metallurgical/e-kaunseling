@@ -2767,6 +2767,8 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 		return $input_fields;
 	}
 
+	/* 
+		hok asal
 	protected function get_read_input_fields($field_values = null)
 	{
 		$read_fields = $this->get_read_fields();
@@ -2794,6 +2796,67 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 			$field_info = $types[$field->field_name];
 
 			$field_value = !empty($field_values) && isset($field_values->{$field->field_name}) ? $field_values->{$field->field_name} : null;
+			if(!isset($this->callback_read_field[$field->field_name]))
+			{
+				$field_input = $this->get_field_input($field_info, $field_value);
+			}
+			else
+			{
+				$primary_key = $this->getStateInfo()->primary_key;
+				$field_input = $field_info;
+				$field_input->input = call_user_func($this->callback_read_field[$field->field_name], $field_value, $primary_key, $field_info, $field_values);
+			}
+
+			switch ($field_info->crud_type) {
+			    case 'invisible':
+			    	unset($this->read_fields[$field_num]);
+			    	unset($fields[$field_num]);
+			    	continue;
+			    	break;
+			    case 'hidden':
+			    	$this->read_hidden_fields[] = $field_input;
+			    	unset($this->read_fields[$field_num]);
+			    	unset($fields[$field_num]);
+			    	continue;
+			    	break;
+			}
+
+			$input_fields[$field->field_name] = $field_input;
+		}
+
+		return $input_fields;
+	}*/
+	protected function get_read_input_fields($field_values = null)
+	{
+		$read_fields = $this->get_read_fields();
+
+		$this->field_types = null;
+		$this->required_fields = null;
+
+		$read_inputs = array();
+		foreach ($read_fields as $field) {
+			if (!empty($this->change_field_type)
+					&& isset($this->change_field_type[$field->field_name])
+					&& $this->change_field_type[$field->field_name]->type == 'hidden') {
+				continue;
+			}
+			$this->field_type($field->field_name, 'readonly');
+		}
+
+		$fields = $this->get_read_fields();
+		$types 	= $this->get_field_types();
+
+		$input_fields = array();
+
+		foreach($fields as $field_num => $field)
+		{
+			$field_info = $types[$field->field_name];
+			
+			if(isset($field_info->db_type) && ($field_info->db_type == 'tinyint' || ($field_info->db_type == 'int' && $field_info->db_max_length == 1))) {
+				$field_value = $this->get_true_false_readonly_input($field_info, $field_values->{$field->field_name});
+			} else {
+				$field_value = !empty($field_values) && isset($field_values->{$field->field_name}) ? $field_values->{$field->field_name} : null;
+			}
 			if(!isset($this->callback_read_field[$field->field_name]))
 			{
 				$field_input = $this->get_field_input($field_info, $field_value);
@@ -3501,6 +3564,7 @@ class Grocery_CRUD extends grocery_CRUD_States
 	protected $callback_upload			= null;
 	protected $callback_before_upload	= null;
 	protected $callback_after_upload	= null;
+	protected $callback_read_field		= array();
 
 	protected $default_javascript_path				= null; //autogenerate, please do not modify
 	protected $default_css_path						= null; //autogenerate, please do not modify
@@ -3540,6 +3604,19 @@ class Grocery_CRUD extends grocery_CRUD_States
 
 		$this->columns = $args;
 
+		return $this;
+	}
+
+	/**
+	 *
+	 * Used to bypass the default formatting and allow user to achieve custom formatting for the view of a field
+	 * @param string $field
+	 * @param mixed $callback
+	 */
+	public function callback_read_field($field, $callback = null)
+	{
+		$this->callback_read_field[$field] = $callback;
+	
 		return $this;
 	}
 
