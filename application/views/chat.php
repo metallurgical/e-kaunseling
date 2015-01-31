@@ -69,26 +69,30 @@
                             float:left;
                             clear: both;
                             border:1px solid red;
-                            width: 350px
+                            width: 350px;
+                            padding: 5px;
                        }
                        .counselor_msg{
                             float: right;
                             clear: both;
                             border:1px solid blue;
-                            width: 350px
+                            width: 350px;
+                            padding: 5px;
+                            text-align: right;
                        }
                        </style>
                         <div class="panel panel-info" >
                             <div class="panel-heading">
                                 Chat With Counselor
                             </div>
-                            <div class="panel-body" style='overflow:auto; height:200px;'>
+                            <div class="panel-body msg_container" style='overflow:auto; height:200px;'>
                                 <!-- <p class="student_msg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
                                 <p class="counselor_msg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p> -->
                                 
                             </div>
                             <div class="panel-footer">
                                 <div>
+                                    <input type="text" value="<?php echo $this->session->userdata('type');;?>" id="user_type">
                                     <textarea cols="50" rows="2" name="msg" id="msg"></textarea> <input type="button" value="Send" name="b_send" id="b_send">
                                 </div>
                             </div>
@@ -97,13 +101,77 @@
                     <script type="text/javascript">
                     $(function(){
 
+                        var msg_container = $('.msg_container')
+                            user_type = $('#user_type');
+
+                        retrieve_data();
+
+                        $('#b_send').on('click', function(e){
+                            e.preventDefault();
+
+                            var msg = $('#msg').val();
+                                send_msg(msg);
+                        })
+                        
                         function retrieve_data(){ 
 
-                            
+                            $.ajax({
+                                type : 'POST',
+                                url : '<?php echo base_url();?>chat/retrieve_data',
+                                dataType : 'json',
+                                success : function(data){
+                                    var bil = data.length,
+                                        msg = '';
+
+
+                                    for (var i = 0; i < bil; i++) {
+                                        
+                                        if(data[i].chat_from != 0){
+                                            msg += "<p class='student_msg'>"+data[i].chat_message+"</p>";
+                                        }else{
+                                            msg += "<p class='counselor_msg'>"+data[i].chat_message+"</p>";
+                                        }
+                                        
+                                    };
+                                   
+                                    msg_container.html(msg);
+                                    scroll_to_bottom();
+                                }
+                            });
+
                         }
 
-                        function send_msg(){}
-                    })
+                        function send_msg(msg){
+
+                            $.ajax({
+                                type : 'POST',
+                                url : '<?php echo base_url();?>chat/send_data',
+                                data : 'msg='+msg,
+                                success : function(data){
+                                   if(user_type.val() == "students"){
+                                        msg_container.append("<p class='student_msg'>"+msg+"</p>");
+                                   }else{
+                                        msg_container.append("<p class='counselor_msg'>"+msg+"</p>");
+                                   }
+                                  scroll_to_bottom();
+                                }
+                            });
+                        }
+
+                        
+                        function scroll_to_bottom(){
+                            msg_container.animate({ scrollTop: msg_container.prop("scrollHeight") - msg_container.height() }, 'slow');
+                        }
+
+/* $('#load_tweets').load('<?php echo base_url();?>chat/retrieve_data').fadeIn("slow");
+                            }, 10000);*/
+                     //$(document).ready(
+                                //function() {
+                                    setInterval(function() {retrieve_data() }, 3000);
+                               // });
+
+
+                                        });
                     </script>
                     </div>
                     <!-- /.col-lg-12 -->                    
