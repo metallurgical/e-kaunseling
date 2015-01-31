@@ -25,6 +25,7 @@ class Appointments extends CI_Controller {
         $state = $crud->getState();
 		$data['page_header_title'] = ucfirst($this->uri->segment(1)) . " Management";
 		$crud->set_table('appointments');
+		$crud->where('student_id',$this->session->userdata('id'));
 		$crud->unset_columns('student_id','appointment_reply'); // never displayed this column in list
 
 		$crud->add_fields('appointment_date','appointment_time','appointment_message','student_id');
