@@ -27,6 +27,8 @@
 
     <!-- Custom Fonts -->
     <link href="<?php echo base_url();?>assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link type="text/css" rel="stylesheet" media="all" href="<?php echo base_url();?>assets/css/chat/chat.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="<?php echo base_url();?>assets/css/chat/screen.css" />
     <?php 
     foreach($css_files as $file): ?>
         <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
