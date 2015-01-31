@@ -18,7 +18,12 @@
                         <li>
                             <a href="<?php echo base_url();?>s_forum/view_categories"><i class="fa fa-dashboard fa-fw"></i> Forum</a>
                         </li>
-                        
+                        <li>
+                            <a href="<?php echo base_url();?>appointments/student_appointments"><i class="fa fa-dashboard fa-fw"></i> Appointment</a>
+                        </li>
+                        <!-- <li>
+                            <a href="<?php echo base_url();?>chat"><i class="fa fa-dashboard fa-fw"></i> Chat</a>
+                        </li> -->
                         
                     </ul>
                     <?php
