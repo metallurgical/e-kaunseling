@@ -21,6 +21,9 @@
                         <li>
                             <a href="<?php echo base_url();?>appointments/student_appointments"><i class="fa fa-dashboard fa-fw"></i> Appointment</a>
                         </li>
+                        <li>
+                            <a href="<?php echo base_url();?>chat/manage_session"><i class="fa fa-dashboard fa-fw"></i> Live Chat</a>
+                        </li>
                         <!-- <li>
                             <a href="<?php echo base_url();?>chat"><i class="fa fa-dashboard fa-fw"></i> Chat</a>
                         </li> -->
@@ -41,11 +44,13 @@
                             </span>
                             </div>
                             <!-- /input-group -->
+                        </li>                        
+                        <li>
+                            <a href="<?php echo base_url();?>appointments/counselor_appointments"><i class="fa fa-dashboard fa-fw"></i> Appointment</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url();?>dashboard"><i class="fa fa-dashboard fa-fw"></i> A Forum</a>
+                            <a href="<?php echo base_url();?>chat/counselor_list_chat"><i class="fa fa-dashboard fa-fw"></i> Live Chat</a>
                         </li>
-                        
                         
                     </ul>
                 <?php

@@ -57,7 +57,7 @@ class Login extends CI_Controller {
 				               		); 
 			 		
 			 		$this->session->set_userdata($newdata);
-			 		redirect('c_forum');
+			 		redirect('appointments/counselor_appointments');
 
 			 	}
 			 	
