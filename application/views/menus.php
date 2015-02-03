@@ -24,9 +24,9 @@
                         <li>
                             <a href="<?php echo base_url();?>chat/manage_session"><i class="fa fa-dashboard fa-fw"></i> Live Chat</a>
                         </li>
-                        <!-- <li>
-                            <a href="<?php echo base_url();?>chat"><i class="fa fa-dashboard fa-fw"></i> Chat</a>
-                        </li> -->
+                        <li>
+                            <a href="<?php echo base_url();?>cam"><i class="fa fa-dashboard fa-fw"></i> Cam</a>
+                        </li>
                         
                     </ul>
                     <?php
