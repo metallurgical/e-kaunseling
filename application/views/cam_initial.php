@@ -66,24 +66,10 @@
                     <div class="col-lg-6">
                        
                        <form action="<?php echo base_url();?>cam/video_cam" method="POST">
-                       Please enter your login name for the video chat : <input type="text" name="loginName">
-                       <input type="submit" name="submit">
+                       Are you ready to video chat with counselor  : <input type="text" name="loginName" value="<?php echo $this->session->userdata('no');?>"/>
+                       <input type="submit" name="submit" value="Yes I'm Ready To Video Chat Now">
                        </form>
-                        <!-- <div class="panel panel-primary" >
-                            <div class="panel-heading">
-                                Chat With 
-                            </div>
-                            <div class="panel-body msg_container" style='overflow:auto; height:400px;background:#E5DDDA'>
-                                <div id="webcam"></div>
-
-                                
-                            </div>
-                            <div class="panel-footer">
-                                <div>
-                                    
-                                </div>
-                            </div>
-                        </div> -->
+                        
                 
                     
                     </div>

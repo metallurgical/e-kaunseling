@@ -6,149 +6,82 @@ class Cam extends CI_Controller {
     {
         parent::__construct();
         date_default_timezone_set("Asia/Kuala_Lumpur");
-        //$this->output->enable_profiler(TRUE); 
+        $this->output->enable_profiler(TRUE); 
         //@session_start();       
     }
 
-public function index(){
+    public function index(){
 
-    $data['page_header_title'] = "Login name";    
-    $this->load->view('cam_initial', $data);
-}
+        $data['page_header_title'] = "Login name";    
+        $this->load->view('cam_initial', $data);
+    }
+
+   public function generateRandomString($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
 
     public function video_cam(){
         $data['page_header_title'] = ucfirst($this->uri->segment(1)) . " Session";
+        $type_user = $this->session->userdata('type');
 
-        if($this->input->post('submit')){
-            $data['roomName'] = "TestingJah";
-            $data['loginName'] = $this->input->post('loginName');
+        if($type_user == "counselors"){
+            $chat_room_name = $this->uri->segment(3);
+            $data['roomName'] = $chat_room_name;
+            $data['loginName'] = 'counselors';
         }
+        else if($type_user == "students"){
+
+            if($this->input->post('submit')){
+            $student_id = $this->session->userdata('id');
+            $student_no = $this->input->post('loginName');
+            $chat_room_name = $this->generateRandomString();
+            $arrayData = array('student_id'=>$student_id,'student_no' => $student_no,'video_chat_name'=>$chat_room_name);
+            $ins = $this->k_model->insert_new_data($arrayData, 'video_chat');
+            $data['roomName'] = $chat_room_name;
+            $data['loginName'] = $student_no;
+         }
+        }
+
+        
         
         $this->load->view('cam', $data, FALSE);
     }
 
-	
-	/*public function index()
-	{
-        @session_start();
-        if( !isset( $_SESSION['chatusername'] )  || !isset( $_SESSION['username'] )  ){
-            $_SESSION['chatusername'] = 'User 2';
-            $_SESSION['username'] = '2';
-        }
-
-		$data['page_header_title'] = ucfirst($this->uri->segment(1)) . " Management";
-		$this->load->view('chat', $data, FALSE);
-       
-    }*/
-
-    /*public function manage_session(){
-
-        $student_id = $this->session->userdata('id');
-        $data['page_header_title'] = ucfirst($this->uri->segment(1)) . " Session";
-
-        if($this->input->post('submit')){
-
-            $arrayData = array(
-                                'student_id' => $this->session->userdata('id'),
-                                'chat_parent_date' => date('Y-m-d'),
-                                'chat_parent_time' => date('h:i:s')
-                                );
-            $ins = $this->k_model->insert_new_data($arrayData,'chat_parent');
-            $where = array('student_id' => $student_id);
-            $order_by = array('chat_parent_id','desc');
-            $sel = $this->k_model->get_specified_row('chat_parent',$where,$order_by,false, false);
-            
-            redirect('chat/student_chat/'.$sel['chat_parent_id']);
-        }
-        $this->load->view('manage_session', $data, FALSE);
-    }
-
-    public function student_chat(){
-        $user_type = $this->session->userdata('type');
-
-        //if($user_type == "students"){
-            $data['chat_parent_id'] = $this->uri->segment(3);
-        //}
-        //
-        if($user_type == "students"){
-            $data['student_id'] = $this->session->userdata('id');
-        }
-        else{
-            $where = array('chat_parent_id' => $data['chat_parent_id']);
-            $sel = $this->k_model->get_specified_row('chat_parent',$where,false,false, false);
-            $data['student_id'] = $sel['student_id'];
-        }
-
-        $data['page_header_title'] = "Live Chat";
-        $this->load->view('chat', $data);
-    }
-
-    public function retrieve_data(){
-        $student_id = $this->session->userdata('id');
-        $user_type = $this->session->userdata('type');
-        $chat_parent_id = $this->input->post('chat_parent_id');
-
-        if($user_type == "counselors"){
-            $where = array('chat_parent_id' => $chat_parent_id);
-        }else{
-            $where = array('student_id' => $student_id, 'chat_parent_id' => $chat_parent_id);
-        }        
-
-        $allData = $this->k_model->get_all_rows('chat',$where, false, false, false, false);
-        echo json_encode($allData);
-    }
-
-    public function send_data(){
-
-        $user_type = $this->session->userdata('type');
-        $student_id = $this->input->post('student_id'); 
-        $msg = $this->input->post('msg');
-        $chat_parent_id = $this->input->post('chat_parent_id');
-        $chat_from = "";
-
-        if($user_type == "counselors"){
-
-            $chat_from = 0;
-        }
-        else{
-
-            $chat_from = $student_id;
-        }
-
-        $arrayData = array(
-                            'student_id' => $student_id,
-                            'chat_from' => $chat_from,
-                            'chat_to' => 'counselor',
-                            'chat_message' => $msg,
-                            'chat_parent_id' => $chat_parent_id
-
-                            );
-
-        $ins = $this->k_model->insert_new_data($arrayData,'chat');
-           
-
-    }
-
-    public function counselor_list_chat(){
-
-        $crud = new grocery_CRUD();
-        $state = $crud->getState();
-        $data['page_header_title'] = 'List '.ucfirst($this->uri->segment(1)) . " Management";
+    public function view_video_chat(){
+        /*$sel = $this->k_model->get_specified_row('video_chat',$where,false,false, false);
+        print_r($sel);*/
+        $data['page_header_title'] = ucfirst($this->uri->segment(1)) . " Video Management";
+        $crud = new grocery_CRUD;
+        $crud->set_table('video_chat');
         $path = base_url();
-        $crud->set_table('chat_parent');
-
         $crud->unset_read()
              ->unset_edit()
              ->unset_add()
              ->unset_print()
              ->unset_export();
-
-        $crud->add_action('View Chat', $path.'/assets/grocery_crud/themes/flexigrid/css/images/magnifier.png', 'chat/student_chat');
+        $crud->add_action('Photos', $path.'/assets/grocery_crud/themes/flexigrid/css/images/magnifier.png', '','',array($this,'chatroomName_and_loginName'));
+        //$crud->add_action('View Chat', $path.'/assets/grocery_crud/themes/flexigrid/css/images/magnifier.png', 'cam/student_chat/'+$student_id);
 
         $output = $crud->render();
         $output->data = $data;
         $this->load->view('universal_page', $output);
-    }*/
+    }
+	
+	function chatroomName_and_loginName($primary_key , $row)
+    {
+        //$where = array('video_chat_id'=>$primary_key);
+        //$sel = $this->k_model->get_specified_row('video_chat',$where,false,false, false);
+        //print_r($sel);
+        //return base_url().'cam/video_cam/'+$row->student_id;
+        //return site_url('cam/video_cam/'+$row->student_id);
+        return site_url('cam/video_cam').'/'.$row->video_chat_name;
+    }
 }
 
 

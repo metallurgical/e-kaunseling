@@ -51,6 +51,9 @@
                         <li>
                             <a href="<?php echo base_url();?>chat/counselor_list_chat"><i class="fa fa-dashboard fa-fw"></i> Live Chat</a>
                         </li>
+                        <li>
+                            <a href="<?php echo base_url();?>cam/view_video_chat"><i class="fa fa-dashboard fa-fw"></i> Video Chat</a>
+                        </li>
                         
                     </ul>
                 <?php
