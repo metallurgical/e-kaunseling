@@ -7,12 +7,12 @@ class Cam extends CI_Controller {
         parent::__construct();
         date_default_timezone_set("Asia/Kuala_Lumpur");
         $this->output->enable_profiler(TRUE); 
-        //@session_start();       
+               
     }
 
     public function index(){
 
-        $data['page_header_title'] = "Login name";    
+        $data['page_header_title'] = "Confirmation Chat";    
         $this->load->view('cam_initial', $data);
     }
 
@@ -54,8 +54,7 @@ class Cam extends CI_Controller {
     }
 
     public function view_video_chat(){
-        /*$sel = $this->k_model->get_specified_row('video_chat',$where,false,false, false);
-        print_r($sel);*/
+       
         $data['page_header_title'] = ucfirst($this->uri->segment(1)) . " Video Management";
         $crud = new grocery_CRUD;
         $crud->set_table('video_chat');
@@ -65,8 +64,9 @@ class Cam extends CI_Controller {
              ->unset_add()
              ->unset_print()
              ->unset_export();
+        $crud->unset_columns('student_id');
         $crud->add_action('Photos', $path.'/assets/grocery_crud/themes/flexigrid/css/images/magnifier.png', '','',array($this,'chatroomName_and_loginName'));
-        //$crud->add_action('View Chat', $path.'/assets/grocery_crud/themes/flexigrid/css/images/magnifier.png', 'cam/student_chat/'+$student_id);
+        
 
         $output = $crud->render();
         $output->data = $data;
@@ -75,11 +75,7 @@ class Cam extends CI_Controller {
 	
 	function chatroomName_and_loginName($primary_key , $row)
     {
-        //$where = array('video_chat_id'=>$primary_key);
-        //$sel = $this->k_model->get_specified_row('video_chat',$where,false,false, false);
-        //print_r($sel);
-        //return base_url().'cam/video_cam/'+$row->student_id;
-        //return site_url('cam/video_cam/'+$row->student_id);
+        
         return site_url('cam/video_cam').'/'.$row->video_chat_name;
     }
 }

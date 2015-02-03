@@ -66,8 +66,8 @@
                     <div class="col-lg-6">
                        
                        <form action="<?php echo base_url();?>cam/video_cam" method="POST">
-                       Are you ready to video chat with counselor  : <input type="text" name="loginName" value="<?php echo $this->session->userdata('no');?>"/>
-                       <input type="submit" name="submit" value="Yes I'm Ready To Video Chat Now">
+                       Are you ready to video chat with counselor ? <input type="hidden" name="loginName" value="<?php echo $this->session->userdata('no');?>"/>
+                       <input type="submit" name="submit" value="Yes, please take me in.">
                        </form>
                         
                 

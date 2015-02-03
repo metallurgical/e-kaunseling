@@ -63,21 +63,31 @@
                     <!-- /.col-lg-12 -->                    
                 </div>
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                        
-                        <div class="panel panel-primary" >
+                        <div class="panel panel-primary" style="">
                             <div class="panel-heading">
-                                Chat With 
+                                Chat With <?php  
+                                if($this->session->userdata('type') == "students"){
+                                    echo "Counselor";
+                                }
+                                else{
+                                    echo "Student";
+                                }?>
                             </div>
                             <div class="panel-body msg_container" style='overflow:auto; height:400px;background:#E5DDDA'>
                                 <div id="webcam"></div>
 
+
+
+
                                 
                             </div>
                             <div class="panel-footer">
-                                <div>
-                                    
-                                </div>
+                                <!-- <div>
+                                    <select id="cameraNames" size="1"></select>
+                                    <select id="microphoneNames" size="1"></select>
+                                </div> -->
                             </div>
                         </div>
                 
@@ -91,7 +101,10 @@
                                     chatRoom: '<?php echo $roomName;?>',
                                     loginName: '<?php echo $loginName;?>',
                                     onError: oopsError,
-                                    country: 'usa'
+                                    country: 'usa',
+                                    height: 350,
+                                    width: 430
+
 
                                 });
 
@@ -99,7 +112,29 @@
 
                                         console.log(errorMsg);
 
-                                    }
+                                }
+
+                                /*function webcamFound(cameraNames,camera,microphoneNames,microphone,volume) 
+                                {
+
+                                    $.each(cameraNames, function(index, text) {
+
+                                        $('#cameraNames').append( $('<option></option>').val(index).html(text) )
+
+                                    });
+
+                                    $('#cameraNames').val(camera);
+
+                                    $.each(microphoneNames, function(index, text) {
+
+                                        $('#microphoneNames').append( $('<option></option>').val(index).html(text) )
+
+                                    });
+
+                                    $('#microphoneNames').val(microphone);
+
+                                }*/
+
 
 
                     });
