@@ -208,6 +208,7 @@ class EzRbacHook
             $this->restrict_access();
         }
 
+        echo "sdsd";
     }
 
     /**
