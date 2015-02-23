@@ -72,9 +72,9 @@
                             </div>
                             <!-- /input-group -->
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="<?php echo base_url();?>dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="<?php echo base_url();?>counselors"><i class="fa fa-dashboard fa-fw"></i> Counselor</a>
                         </li>

@@ -76,7 +76,7 @@
 		<code>
 			<p>
 				<input type="button" value="Counselors/Students" onclick="window.location.href='<?php echo base_url();?>login'" /> 
-				<input type="button" value="Administrators" onclick="window.location.href='<?php echo base_url();?>dashboard'"/>
+				<input type="button" value="Administrators" onclick="window.location.href='<?php echo base_url();?>counselors'"/>
 			</p>
 		</code>
 
