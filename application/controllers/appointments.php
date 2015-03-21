@@ -127,9 +127,10 @@ class Appointments extends CI_Controller {
 	    	$status = '<font color="orange">In Progress</font>';
 	    }
 	    else if($value == 1){
-	    	$status = '<font color="green">Approved</font> <br /><br />
+	    	$status = '<font color="green">Approved</font>  ';
+	    	/*<br /><br />
 	    	<input type="button" value="Chat With Student"/> <br /><br />
-	    	<input type="button" value="Video Chat With Student"/> ';
+	    	<input type="button" value="Video Chat With Student"/>*/
 	    }
 	    elseif($value == 2){
 	    	$status = '<font color="red">Rejected</font>';
@@ -144,9 +145,10 @@ class Appointments extends CI_Controller {
 	    	$status = '<font color="orange">In Progress</font>';
 	    }
 	    else if($value == 1){
-	    	$status = '<font color="green">Approved</font> <br /><br />
+	    	$status = '<font color="green">Approved</font>  ';
+	    	/*<br /><br />
 	    	<input type="button" value="Chat With Counselor"/> <br /><br />
-	    	<input type="button" value="Video Chat With Counselor"/> ';
+	    	<input type="button" value="Video Chat With Counselor"/>*/
 	    }
 	    elseif($value == 2){
 	    	$status = '<font color="red">Rejected</font>';
